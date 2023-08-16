@@ -1,0 +1,326 @@
+{% load static %}
+{% load humanize %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Mahida Salon </title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+  <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css?family=Barlow+Condensed:500,600,700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="{% static 'css/open-iconic-bootstrap.min.css' %}" />
+  <link rel="stylesheet" href="{% static 'css/animate.css' %}" />
+
+  <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}" />
+  <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}" />
+  <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}" />
+
+  <link rel="stylesheet" href="{% static 'css/aos.css' %}" />
+
+  <link rel="stylesheet" href="{% static 'css/ionicons.min.css' %}" />
+
+  <link rel="stylesheet" href="{% static 'css/bootstrap-datepicker.css' %}" />
+  <link rel="stylesheet" href="{% static 'css/jquery.timepicker.css' %}" />
+
+  <link rel="stylesheet" href="{% static 'css/flaticon.css' %}" />
+  <link rel="stylesheet" href="{% static 'css/icomoon.css' %}" />
+  <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+    <div class="container">
+      <a class="navbar-brand" href="{%url 'index'%}"><span class="flaticon-scissors-in-a-hair-salon-badge"></span>Mahida
+        Salon</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
+        aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="oi oi-menu"></span> Menu
+      </button>
+
+      <div class="collapse navbar-collapse" id="ftco-nav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item ">
+            <a href="{%url 'index'%}" class="nav-link">Home</a>
+          </li>
+          <li class="nav-item active">
+            <a href="{%url 'serviceuser'%}" class="nav-link">Service</a>
+          </li>
+          <li class="nav-item">
+            <a href="{%url 'produkuser'%}" class="nav-link">Product</a>
+          </li>
+          <li class="nav-item">
+            <a href="{%url 'aboutuser'%}" class="nav-link">About</a>
+          </li>
+          <li class="nav-item">
+            <a href="{%url 'contactuser'%}" class="nav-link">Contact</a>
+          </li>
+          <li class="nav-item">
+            <a href="{%url 'logout'%}" class="nav-link">Logout </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- END nav -->
+
+  <section class="hero-wrap hero-wrap-2" style="background-image: url('/static/images/bg-2.jpg')"
+    data-stellar-background-ratio="0.5">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-center">
+        <div class="col-md-9 ftco-animate pb-5 text-center">
+          <h2 class="mb-0 bread">Service</h2>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="services-section ftco-section">
+    <div class="container">
+      <div class="row justify-content-center pb-3 mb-3">
+        <div class="col-md-10 heading-section text-center ftco-animate">
+          <span class="subheading">Service</span>
+          <h2 class="mb-4">Service Menu</h2>
+          <span class="subheading">Nails</span>
+        </div>
+      </div>
+      <div class="row row-cols-1 row-cols-md-3 g-4">
+        {% for nails in nails %}
+        <div class="col">
+          <div class="card">
+            <img src="{{nails.foto_service.url }}" class="card-img-top" alt="..." style="object-fit: cover;">
+            <div class="card-body text-center">
+              <h5 class="card-title">{{nails.nama_layanan}}</h5>
+              <p class="card-text">Rp. {{ nails.harga_layanan|floatformat:0|intcomma }}</p>
+              <div class="d-flex justify-content-center">
+                <a href="{%url 'booking' id=nails.id%}" class="btn btn-success d-flex align-items-center mr-3"
+                  style="border-radius: 15px; max-width: 150px; display: inline-block;"><ion-icon name="calendar"
+                    class=""></ion-icon><span class="ml-1">Reservasi</span></a>
+                <a href="{% url 'detailuser' jenis_layanan='Nails' id=nails.id %}"
+                  class="btn btn-dark d-flex align-items-center"
+                  style="border-radius: 15px; max-width: 150px; display: inline-block;"><ion-icon name="eye"
+                    class=""></ion-icon><span class="ml-1">Lihat Detail</span></a>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      <div class="row justify-content-center pb-3 mt-5">
+        <div class="col-md-10 heading-section text-center ftco-animate">
+          <span class="subheading mt-3">Hair Care</span>
+        </div>
+      </div>
+      <div class="row row-cols-1 row-cols-md-3 g-4">
+        {% for haircare in haircare %}
+        <div class="col">
+          <div class="card">
+            <img src="{{haircare.foto_service.url}}" class="card-img-top" alt="..." style="object-fit:fill;">
+            <div class="card-body text-center">
+              <h5 class="card-title">{{haircare.nama_layanan}}</h5>
+              <p class="card-text">Rp. {{ haircare.harga_layanan|floatformat:0|intcomma }}</p>
+              <div class="d-flex justify-content-center">
+                <a href="{%url 'booking' id=haircare.id%}" class="btn btn-success d-flex align-items-center mr-3"
+                  style="border-radius: 15px; max-width: 150px; display: inline-block;"><ion-icon name="calendar"
+                    class=""></ion-icon><span class="ml-1">Reservasi</span></a>
+                <a href="{% url 'detailuser' jenis_layanan='Haircare' id=haircare.id %}"
+                  class="btn btn-dark d-flex align-items-center"
+                  style="border-radius: 15px; max-width: 150px; display: inline-block;"><ion-icon name="eye"
+                    class=""></ion-icon><span class="ml-1">Lihat Detail</span></a>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      <div class="row justify-content-center pb-3 mt-5">
+        <div class="col-md-10 heading-section text-center ftco-animate">
+          <span class="subheading mt-3">Eyelash</span>
+        </div>
+      </div>
+      <div class="row row-cols-1 row-cols-md-3 g-4">
+        {% for eyelash in eyelash %}
+        <div class="col">
+          <div class="card">
+            <img src="{{eyelash.foto_service.url}}" class="card-img-top" style="object-fit:fill;">
+            <div class="card-body text-center">
+              <h5 class="card-title">{{eyelash.nama_layanan}}</h5>
+              <p class="card-text">Rp. {{ eyelash.harga_layanan|floatformat:0|intcomma }}</p>
+              <div class="d-flex justify-content-center">
+                <a href="{%url 'booking' id=eyelash.id%}" class="btn btn-success d-flex align-items-center mr-3"
+                  style="border-radius: 15px; max-width: 150px; display: inline-block;"><ion-icon name="calendar"
+                    class=""></ion-icon><span class="ml-1">Reservasi</span></a>
+                <a href="{% url 'detailuser' jenis_layanan='Eyelash' id=eyelash.id %}"
+                  class="btn btn-dark d-flex align-items-center"
+                  style="border-radius: 15px; max-width: 150px; display: inline-block;"><ion-icon name="eye"
+                    class=""></ion-icon><span class="ml-1">Lihat Detail</span></a>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <section class="ftco-section ftco-pricing">
+    <div class="container">
+      <div class="row justify-content-center pb-3">
+        <div class="col-md-10 heading-section text-center ftco-animate">
+          <span class="subheading">Pricing</span>
+          <h2 class="mb-4">Our Prices</h2>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4 ftco-animate">
+          <div class="pricing-entry pb-5 text-Left">
+            <div>
+              <h3 class="mb-3">Hair Care</h3>
+            </div>
+            <ul>
+              <li>Hair Cut 35k</li>
+              <li>Creambath 40k</li>
+              <li>Curly 45k</li>
+              <li>Blow Variasy + wash 50k</li>
+              <li>Deep nourishing Loreal 85k</li>
+              <li>Hydrasource 110k</li>
+              <li>Hair Smooting 200k</li>
+              <li>Hair Coloring 200k</li>
+              <li>Treatment Kerati 200k</li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-4 ftco-animate">
+          <div class="pricing-entry pb-5 text-Left">
+            <div>
+              <h3 class="mb-3">Nails Art</h3>
+            </div>
+            <ul>
+              <li>French Polish25k</li>
+              <li>Nails Care 65k</li>
+              <li>Gel Polish 135k</li>
+              <li>Gel polish Halal 135k</li>
+              <li>Nail Art 165k</li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-4 ftco-animate">
+          <div class="pricing-entry pb-5 text-Left">
+            <div>
+              <h3 class="mb-3">Eyelash</h3>
+            </div>
+            <ul>
+              <li>Remove Eyelash 80k</li>
+              <li>Single Lash 160k</li>
+              <li>Lash Lift 120k</li>
+              <li>Double / Soft Volume 215k</li>
+              <li>Lash lift Package 300k</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="ftco-footer ftco-section">
+    <div class="container">
+      <div class="row mb-5">
+        <div class="col-md">
+          <div class="ftco-footer-widget mb-4">
+            <h2 class="ftco-heading-2 logo">Haircare</h2>
+            <p>
+              Mahida Salon merupakan bidang pelayanan jasa kecantikan yang
+              berada di kota Subang
+            </p>
+            <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
+              <li class="ftco-animate">
+                <a href="#"><span class="icon-twitter"></span></a>
+              </li>
+              <li class="ftco-animate">
+                <a href="#"><span class="icon-facebook"></span></a>
+              </li>
+              <li class="ftco-animate">
+                <a href="#"><span class="icon-instagram"></span></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md">
+          <div class="ftco-footer-widget mb-4 ml-md-5">
+            <h2 class="ftco-heading-2">Information</h2>
+            <ul class="list-unstyled">
+              <li><a href="#" class="py-2 d-block">FAQs</a></li>
+              <li><a href="#" class="py-2 d-block">Privacy</a></li>
+              <li><a href="#" class="py-2 d-block">Terms Condition</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md">
+          <div class="ftco-footer-widget mb-4">
+            <h2 class="ftco-heading-2">Links</h2>
+            <ul class="list-unstyled">
+              <li><a href="#" class="py-2 d-block">Home</a></li>
+              <li><a href="#" class="py-2 d-block">Service</a></li>
+              <li><a href="#" class="py-2 d-block">Produk</a></li>
+              <li><a href="#" class="py-2 d-block">About</a></li>
+              <li><a href="#" class="py-2 d-block">Contact</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md">
+          <div class="ftco-footer-widget mb-4">
+            <h2 class="ftco-heading-2">Have a Questions?</h2>
+            <div class="block-23 mb-3">
+              <ul>
+                <li>
+                  <span class="icon icon-map-marker"></span><span class="text">Jl. Perumnas Raya, Karanganyar,
+                    Kec.Subang, Kab.Subang,
+                    Jawa Barat 41211</span>
+                </li>
+                <li>
+                  <a href="https://wa.me/083195767707"><span class="icon icon-phone"></span><span
+                      class="text">083195767707</span></a>
+                </li>
+                <li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- loader -->
+  <div id="ftco-loader" class="show fullscreen">
+    <svg class="circular" width="48px" height="48px">
+      <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" />
+      <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10"
+        stroke="#F96D00" />
+    </svg>
+  </div>
+  <script src="https://unpkg.com/ionicons@latest/dist/ionicons.js"></script>
+  <script src="{% static 'js/jquery.min.js' %}"></script>
+  <script src="{% static 'js/jquery-migrate-3.0.1.min.js' %}"></script>
+  <script src="{% static 'js/popper.min.js' %}"></script>
+  <script src="{% static 'js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'js/jquery.easing.1.3.js' %}"></script>
+  <script src="{% static 'js/jquery.waypoints.min.js' %}"></script>
+  <script src="{% static 'js/jquery.stellar.min.js' %}"></script>
+  <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+  <script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
+  <script src="{% static 'js/aos.js' %}"></script>
+  <script src="{% static 'js/jquery.animateNumber.min.js' %}"></script>
+  <script src="{% static 'js/bootstrap-datepicker.js' %}"></script>
+  <script src="{% static 'js/jquery.timepicker.min.js' %}"></script>
+  <script src="{% static 'js/scrollax.min.js' %}"></script>
+  <script
+    src="{% static 'https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false' %}"></script>
+  <script src="{% static 'js/google-map.js' %}"></script>
+  <script src="{% static 'js/main.js' %}"></script>
+</body>
+
+</html>

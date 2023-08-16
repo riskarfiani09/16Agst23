@@ -1,0 +1,74 @@
+{% extends 'menu_admin.html'%}
+
+{% block content %}
+
+<main class="mt-2 pt-3">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <h3 class="text-uppercase">Tambah Service</h3>
+        <nav aria-label="breadcrumb mb-3" style="font-size: 13px;">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{%url 'kelola_service'%}">Kelola Service</a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">Tambah Service</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 mb-3">
+        <form method="post" enctype="multipart/form-data" action="{% url 'update_service' id=service.id %}">
+          {%csrf_token%}
+          <div class="mb-3" style="border-color: #db3e6e;">
+            <label for="username" class="form-label">Nama Layanan</label>
+            <input type="name" class="form-control" id="username" name="username" value="{{service.nama_layanan}}">
+          </div>
+          <div class="mb-3"></div>
+          <label for="js" class="form-label">Jenis Layanan</label>
+          <select class="form-select" aria-label="Default select example" name="js" value="{{service.jenis_layanan}}">
+            <option value="Haircare" {% if service.jenis_layanan == 'Haircare' %}selected{% endif %}>Haircare</option>
+            <option value="Bodycare" {% if service.jenis_layanan == 'Bodycare' %}selected{% endif %}>Bodycare</option>
+            <option value="Skincare" {% if service.jenis_layanan == 'Skincare' %}selected{% endif %}>Skincare</option>
+          </select>
+      </div>
+      <div class="mb-3">
+        <label for="harga" class="form-label">Harga Layanan</label>
+        <input type="text" class="form-control rupiah" id="harga" name="harga" pattern="[0-9]+" required value="{{service.harga_layanan}}">
+        <small class="form-text text-muted">Masukkan harga layanan dalam format rupiah.</small>
+      </div>
+      <div class="mb-3">
+        <label for="file_foto" class="form-label">Foto</label>
+        <input type="file" class="form-control" id="file_foto" name="file_foto" value="{{service.foto_service}}">
+      </div>
+      <div class="mb-3">
+        <label for="deskripsi" class="form-label">Deskripsi</label>
+        <textarea class="form-control" id="deskripsi" name="deskripsi" rows="3" >{{service.deskripsi}}</textarea>
+      </div>
+      <div class="text-center">
+        <button type="submit" style="border-radius: 40px;" class="btn btn-primary">Tambah</button>
+      </div>
+      </form>
+    </div>
+  </div>
+  </div>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
+<script>
+  // Menerapkan format rupiah pada input field dengan class 'rupiah'
+  $('.rupiah').on('input', function () {
+    var value = $(this).val();
+
+    // Menghapus semua karakter selain angka
+    value = value.replace(/\D/g, '');
+
+    // Mengubah nilai menjadi format rupiah dengan awalan "Rp"
+    var numeralValue = 'Rp ' + numeral(value).format('0,0');
+
+    $(this).val(numeralValue);
+  });
+</script>
+
+
+{% endblock content %}

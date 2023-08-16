@@ -1,0 +1,93 @@
+{% extends 'menu_admin.html' %}
+
+{% block content %}
+
+{% load humanize %}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
+
+
+<main class="mt-2 pt-3">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <h3 class="text-uppercase mb-3">Kelola Transaksi</h3>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 mb-3">
+        <div class="card">
+          <div class="card-header">
+            <span><i class="bi bi-table me-2"></i></span> Tabel Kelola Transaksi
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table id="example" class="table table-striped table-bordered data-table" style="width: 100%">
+                <thead style="text-align: center;">
+                  <tr>
+                    <th>No</th>
+                    <th>Atas Nama</th>
+                    <th>Nomor Wa</th>
+                    <th>ID Penjualan</th>
+                    <th>No Keranjang</th>
+                    <th>Bukti</th>
+                    <th>Tanggal Pembayaran</th>
+                    <th>Status</th>
+                    <th>Aksi</th>
+                  </tr>
+                </thead>
+                <tbody style="text-align: center;">
+                  {% for transaksi in transaksi %}
+                  <tr>
+                    <td>{{ transaksi.id }}</td>
+                    <td>{{ transaksi.nama_pengirim }}</td>
+                    <td>{{ transaksi.penjualan.no_wa }}</td>
+                    <td>{{ transaksi.penjualan_id }}</td>
+                    <td>{{ transaksi.keranjang_id }}</td>
+                    <td>
+                      {% if transaksi.bukti_transfer %}
+                      <a href="{{ transaksi.bukti_transfer.url }}" class="image-popup">
+                        <img src="{{ transaksi.bukti_transfer.url }}" style="width: 70%;">
+                      </a>
+                      {% endif %}
+                    </td>
+                    <td>{{ transaksi.created_at|date }}</td>
+                    <td>{{ transaksi.status }}</td>
+                    <td>
+                      <form method="post" id="form-setuju" action="{% url 'dikirim' transaksi.id %}">
+                        {% csrf_token %}
+                        <button type="submit" id="form-setuju" class="btn btn-success mb-2">
+                          <ion-icon name="checkmark-circle"></ion-icon>
+                        </button>
+                      </form>
+                      <form method="post" action="{% url 'ditolak' transaksi.id %}">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger"><ion-icon name="close-circle"></ion-icon></button>
+                      </form>
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script>
+  $(document).ready(function () {
+    $('.image-popup').magnificPopup({
+      type: 'image',
+      gallery: {
+        enabled: true
+      }
+    });
+  });
+</script>
+
+{% endblock content %}

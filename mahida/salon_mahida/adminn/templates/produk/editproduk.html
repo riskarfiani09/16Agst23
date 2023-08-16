@@ -1,0 +1,62 @@
+{% extends 'menu_admin.html'%}
+
+{% block content %}
+
+<main class="mt-2 pt-3">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <h3 class="text-uppercase">Tambah Jadwal</h3>
+        <nav aria-label="breadcrumb mb-3" style="font-size: 13px;">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{%url 'kelola_jadwal'%}">Kelola Jadwal</a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">Tambah Jadwal</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 mb-3">
+        <form method="post" enctype="multipart/form-data" action="{% url 'update_produk' id=produk.id %}">
+          {%csrf_token%}
+          <div class="mb-3" style="border-color: #db3e6e;">
+            <label for="nama" class="form-label">Nama Product</label>
+            <input type="name" class="form-control" id="nama" name="nama" value="{{produk.nama}}">
+          </div>
+          <div class="mb-3">
+            <label for="js" class="form-label">Jenis Layanan</label>
+            <select class="form-select" aria-label="Default select example" name="js">
+              <option value="Haircare" {% if produk.kategori == 'Haircare' %}selected{% endif %}>Haircare</option>
+              <option value="Bodycare" {% if produk.kategori == 'Bodycare' %}selected{% endif %}>Bodycare</option>
+              <option value="Skincare" {% if produk.kategori == 'Skincare' %}selected{% endif %}>Skincare</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="harga" class="form-label">Harga Product</label>
+            <input type="text" class="form-control rupiah" id="harga" name="harga" pattern="[0-9]+" required
+              value="{{produk.harga}}">
+            <small class="form-text text-muted">Masukkan harga produk dalam format angka.</small>
+          </div>
+          <div class="mb-3">
+            <label for="stok" class="form-label">Stok</label>
+            <input type="text" class="form-control rupiah" id="stok" name="stok" required value="{{produk.stok}}">
+          </div>
+          <div class="mb-3">
+            <label for="foto" class="form-label">Foto</label>
+            <input type="file" class="form-control" id="foto" name="foto">
+          </div>
+          <div class="mb-3">
+            <label for="deskripsi" class="form-label">Deskripsi</label>
+            <textarea class="form-control" id="deskripsi" name="deskripsi" rows="3">{{ produk.deskripsi }}</textarea>
+          </div>
+          <div class="text-center">
+            <button type="submit" style="border-radius: 40px;" class="btn btn-primary">Tambah</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</main>
+
+{% endblock content %}

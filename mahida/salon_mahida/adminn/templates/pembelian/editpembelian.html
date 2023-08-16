@@ -1,0 +1,40 @@
+{% extends 'menu_admin.html'%}
+
+{% block content %}
+
+<main class="mt-2 pt-3">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <h3 class="text-uppercase">Tambah Jadwal</h3>
+        <nav aria-label="breadcrumb mb-3" style="font-size: 13px;">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{%url 'kelola_jadwal'%}">Kelola Jadwal</a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">Tambah Jadwal</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 mb-3">
+        <form method="post" enctype="multipart/form-data" action="{% url 'update_pembelian' id=pembelian.id %}">
+          {%csrf_token%}
+          <option>Pilih Produk</option>
+          <select name="nama" id="produk" class="form-control">
+            <option value="{{ pembelian.produk.nama }}">{{ pembelian.produk.nama }}</option>
+          </select>
+          <div class="mb-3">
+            <label for="jumlah" class="form-label">Jumlah</label>
+            <input type="number" class="form-control" id="jumlah" name="jumlah" value="{{pembelian.jumlah}}">
+          </div>
+          <div class="text-center">
+            <button type="submit" style="border-radius: 40px;" class="btn btn-primary">Tambah</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</main>
+
+{% endblock content %}

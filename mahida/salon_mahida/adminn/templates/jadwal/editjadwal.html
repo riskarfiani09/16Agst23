@@ -1,0 +1,55 @@
+{% extends 'menu_admin.html'%}
+
+{% block content %}
+
+<main class="mt-2 pt-3">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <h3 class="text-uppercase">Tambah Jadwal</h3>
+        <nav aria-label="breadcrumb mb-3" style="font-size: 13px;">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{%url 'kelola_jadwal'%}">Kelola Jadwal</a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">Tambah Jadwal</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 mb-3">
+        <form method="post" enctype="multipart/form-data" action="{% url 'update_jadwal' id=jadwal.id %}">
+          {%csrf_token%}
+          <div class="mb-3" style="border-color: #db3e6e;">
+            <label for="nama_pegawai" class="form-label">Nama Pegawai</label>
+            <input type="name" class="form-control" id="nama_pegawai" name="nama_pegawai"
+              value="{{jadwal.nama_pegawai}}">
+          </div>
+          <div class="mb-3">
+            <label for="status" class="form-label">Status Kesibukan</label>
+            <select class="form-select" aria-label="Default select example" name="status">
+              <option value="Sibuk">Sibuk</option>
+              <option value="Tidak Sibuk">Tidak Sibuk</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="jam" class="form-label">Jam</label>
+            <input type="time" class="form-control" id="jam" name="jam" value="{{jadwal.jam}}">
+            <p class="text-disabled">Jam harus diisi</p>
+
+          </div>
+          <div class="mb-3">
+            <label for="tanggal" class="form-label">Tanggal</label>
+            <input type="date" class="form-control" id="tanggal" name="tanggal" value="{{jadwal.tanggal}}">
+            <p class="text-disabled">Tanggal harus diisi</p>
+          </div>
+          <div class="text-center">
+            <button type="submit" style="border-radius: 40px;" class="btn btn-primary">Tambah</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</main>
+
+{% endblock content %}

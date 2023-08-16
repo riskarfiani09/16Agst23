@@ -1,0 +1,190 @@
+/* import */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Roboto:wght@400;500;700&display=swap');
+
+/* variable */
+:root {
+  /* Color/Bg Color */
+  --color-satu: #db3e6e;
+  --color-satu-rgba: rgba(249, 190, 18, 1);
+  --color-dua: #19b23e;
+  --color-dua-rgba: rgba(25, 178, 62, 1);
+  --color-tiga: #fe6d40;
+  --color-tiga-rgba:
+    rgba(254, 109, 64, 1);
+  --color-empat: #ffffff;
+  --color-empat-rgba: rgba(235, 38, 143, 1);
+  --color-lima: #ffffff;
+  --color-lima-rgba: rgba(255, 255, 255, 0.4);
+  --color-enam: #000000;
+
+  /* Font Size */
+  --font-besar: 58px;
+  --font-h1: 45px;
+  --font-normal: 18px;
+  --font-kecil: 16px;
+  --font-kecil-sangat: 14px;
+
+  /* Font Family */
+  --font-first: 'Roboto', sans-serif;
+  --font-second: 'Poppins', sans-serif;
+
+  /* Font Weight */
+  --font--regular: 400;
+  --font-semibold: 600;
+  --font-medium: 500;
+  --font-bold: 700;
+
+  /* admin */
+  --offcanvas-width: 270px;
+  --topNavbarHeight: 56px;
+
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+a,
+a:hover {
+  text-decoration: none;
+}
+
+/* Login */
+body.login-admin {
+  background-color: var(--color-empat);
+}
+
+body.login-admin .card {
+  margin-top: 110px;
+}
+
+body.login-admin .container {
+  border-radius: 100px;
+}
+
+.imglog1 {
+  width: 80px;
+  height: 80px;
+}
+
+.form-group {
+  margin-bottom: 1 rem;
+}
+
+form.user .form-control-user {
+  font-size: 0.8rem;
+  padding: 10px;
+  border-radius: 20px;
+}
+
+/* button */
+form.user .btn-user {
+  font-size: 0.8rem;
+  font-weight: 600;
+  border-radius: 3rem;
+  padding: 0.5rem 2rem;
+  margin-top: 3rem;
+  margin-bottom: 2rem;
+  background-color: var(--color-satu);
+  border: 0;
+  color: var(--color-enam);
+}
+
+form.user .btn-user:hover {
+  background-color: var(--color-empat);
+  color: var(--color-lima);
+}
+
+body.login-admin .sh-icon {
+  position: absolute;
+  right: 347px;
+  top: 245px;
+}
+
+body.login-admin .sh-icon i {
+  cursor: pointer;
+  font-size: 18px;
+}
+
+/* Admin */
+.sidebar-nav {
+  width: var(--offcanvas-width);
+  margin-top:-56px;
+  background-color: var(--color-satu);
+  color: #ffffff;
+}
+
+
+.sidebar-link {
+  display: flex;
+  align-items: center;
+}
+
+.sidebar-link .right-icon {
+  display: inline-flex;
+}
+
+.sidebar-link[aria-expanded="true"] .right-icon {
+  transform: rotate(180deg);
+}
+
+body.admin {
+  overflow: auto !important;
+}
+
+body.admin .bg-admin {
+  background-color: var(--color-empat);
+}
+
+body.admin .navbar-nav .nav-link {
+  color: var(--color-empat);
+}
+
+body.admin .navbar-nav .nav-link.active,
+.nav-link::after,
+.nav-link::before {
+  color: var(--color-empat);
+}
+
+body.admin .navbar-nav .nav-link:hover {
+  color: black;
+}
+
+.btn-mahida{
+  background-color: #db3e6e;
+  color: #ffffff;
+  margin-left: 50rem;
+  padding-left: 30px;
+  margin-bottom: 20px;
+}
+.btn-mahida:hover{
+  background-color: #000000;
+  color: #ffffff;
+}
+
+body.admin main {
+  margin-left: var(--offcanvas-width);
+}
+
+/* this is to remove the backdrop */
+.offcanvas-backdrop::before {
+  display: none;
+}
+
+.sidebar-nav {
+  -webkit-transform: none;
+  transform: none;
+  visibility: visible !important;
+  height: -100px;
+  top: var(--topNavbarHeight);
+}
+
+.data-master {
+  background-color: #b3b3b3;
+  border-radius: 20px;
+}
+
+
+/* Admin close */

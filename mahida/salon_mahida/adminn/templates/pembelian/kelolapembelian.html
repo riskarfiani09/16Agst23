@@ -1,0 +1,62 @@
+{% extends 'menu_admin.html'%}
+
+{% block content %}
+
+{% load humanize %}
+<main class="mt-2 pt-3">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <h3 class="text-uppercase mb-3">Kelola Pembelian</h3>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 mb-3">
+        <div class="card">
+          <div class="card-header">
+            <span><i class="bi bi-table me-2"></i></span> Tabel Kelola Pembelian
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <div class="">
+                <a href="{%url 'tambah_pembelian'%}" class="btn btn-mahida d-flex align-items-center"
+                  style="margin-left: 57rem; margin-right:10px;"><ion-icon name="add-circle"
+                    size="small"></ion-icon>Tambah Pembelian </a>
+              </div>
+              <table id="example" class="table table-striped table-bordered data-table" style="width: 100%">
+                <thead style="text-align: center;">
+                  <tr>
+                    <th>No</th>
+                    <th>Nama Product</th>
+                    <th>Jumlah</th>
+                    <th>Tanggal Pembelian</th>
+                    <th>Aksi</th>
+                  </tr>
+                </thead>
+                <tbody style="text-align: center;">
+                  {% for pembelian in pembelian %}
+                  <tr>
+                    <td>{{pembelian.id}}</td>
+                    <td>{{pembelian.produk.nama}}</td>
+                    <td>{{pembelian.jumlah}}</td>
+                    <td>{{pembelian.created_at|date}}</td>
+                    <td> <a href="/edit/pembelian/{{ pembelian.id }}/" class="btn btn-primary mb-1"><ion-icon
+                          name="create"></ion-icon></a>
+                      <form action="/delete/pembelian/{{ pembelian.id }}/" method="post"
+                        onsubmit="return confirm('Apakah Anda yakin ingin menghapus pengguna ini?')">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger"><ion-icon name="trash"></ion-icon></button>
+                      </form>
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock content %}

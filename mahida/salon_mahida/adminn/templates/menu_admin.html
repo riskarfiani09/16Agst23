@@ -1,0 +1,237 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{%static '/css/cssadmin/dataTables.bootstrap5.min.css'%}" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="{%static '/css/admin.css'%}" />
+
+    <!-- Boxicons CSS -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <title>Admin</title>
+</head>
+
+<body class="admin">
+    <!-- offcanvas -->
+    <div class="offcanvas offcanvas-start sidebar-nav" tabindex="-1" id="sidebar">
+        <div class="offcanvas-body p-0">
+            <nav class="navbar">
+                <ul class="navbar-nav">
+                    <li>
+                        <a href="/admin" class="nav-link px-3 py-4 active" aria-current="page">
+                            <span class="me-2"><i class="bi bi-speedometer"></i></span>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li>
+                        <div class="small text-dark fw-bold text-uppercase px-3 mb-3">
+                            DATA MASTER
+                        </div>
+                    </li>
+                    <li class="">
+                        <a href="{%url 'kelola_user'%}" class="nav-link px-3">
+                            <span class="me-2"><ion-icon name="person"></ion-icon></span>
+                            <span>Kelola User</span>
+                        </a>
+                    </li>
+                    <hr width="265px">
+                    <li class="">
+                        <a href="{%url 'kelola_service'%}" class="nav-link px-3">
+                            <span class="me-2"><ion-icon name="briefcase"></ion-icon></span>
+                            <span>Kelola Service</span>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="{%url 'kelola_jadwal'%}" class="nav-link px-3">
+                            <span class="me-2"><ion-icon name="calendar"></ion-icon></span>
+                            <span>Kelola Jadwal</span>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="{%url 'kelola_booking'%}" class="nav-link px-3">
+                            <span class="me-2"><ion-icon name="documents"></ion-icon></span>
+                            <span>Kelola Reservasi</span>
+                        </a>
+                    </li>
+                    <hr width="265px">
+                    <li class="">
+                        <a href="{%url 'kelola_produk'%}" class="nav-link px-3">
+                            <span class="me-2"><ion-icon name="cart"></ion-icon></span>
+                            <span>Kelola Produk</span>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="{%url 'kelola_penjualan'%}" class="nav-link px-3">
+                            <span class="me-2"><ion-icon name="cube"></ion-icon></span>
+                            <span>Kelola Penjualan</span>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="{% url 'kelola_pembelian'%}" class="nav-link px-3">
+                            <span class="me-2"><ion-icon name="pricetags"></ion-icon></span>
+                            <span>Kelola Pembelian</span>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="{%url 'kelola_transaksi'%}" class="nav-link px-3">
+                            <span class="me-2"><ion-icon name="documents"></ion-icon></span>
+                            <span>Kelola Transaksi</span>
+                        </a>
+                    </li>
+                    <hr width="265px">
+                    <li>
+                        <div class="small text-dark fw-bold text-uppercase px-3 mb-3">
+                            KELOLA LAPORAN
+                        </div>
+                    </li>
+                    <li class="">
+                        <a href="{% url 'laporan_reservasi' %}" class="nav-link px-3">
+                            <span class="me-2"><ion-icon name="bar-chart"></ion-icon></span>
+                            <span>Laporan Reservasi</span>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="{% url 'laporan_penjualan' %}" class="nav-link px-3">
+                            <span class="me-2"><ion-icon name="bar-chart"></ion-icon></span>
+                            <span>Laporan Penjualan</span>
+                        </a>
+                    </li>
+                    </li>
+                    <li class="">
+                        <a href="{% url 'laporan_pembelian' %}" class="nav-link px-3">
+                            <span class="me-2"><ion-icon name="bar-chart"></ion-icon></span>
+                            <span>Laporan Pembelian</span>
+                        </a>
+                    </li>
+                    <div>
+                        <a class="btn btn-primary mx-3 mt-5" href="{%url 'logout'%}" data-toggle="modal"
+                            data-target="#logoutModal">
+                            Logout
+                        </a>
+                    </div>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <!-- offcanvas -->
+    {% block content %}
+
+    <main class="mt-2 pt-3">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <h4 class="text-uppercase mb-3">Dashboard</h4>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-md-12 mb-3">
+                    <div class="card shadow mb-4">
+                        <!-- Card Header - Dropdown -->
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary text-center">Total Data Master Reservasi</h6>
+                        </div>
+                        <!-- Card Body -->
+                        <div class="card-body">
+                            <div class="chart-pie pt-4">
+                                <canvas id="myPieChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary text-center">Total Data Master Produk</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="chart-area">
+                                <canvas id="myAreaChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </main>
+    {% endblock content %}
+    <script src="https://unpkg.com/ionicons@latest/dist/ionicons.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.2/dist/chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.2/dist/chart.min.js"></script>
+    <script src="{%static '/js/jsadmin/jquery-3.5.1.js'%}"></script>
+    <script src="{%static '/js/jsadmin/jquery.dataTables.min.js'%}"></script>
+    <script src="{%static '/js/jsadmin/dataTables.bootstrap5.min.js'%}"></script>
+    <script src="{%static '/js/jsadmin/script.js'%}"></script>
+    <script src="{%static '/js/jsadmin/pie.js'%}"></script>
+    <script src="{%static '/js/jsadmin/Chart.min.js'%}"></script>
+    <!-- ... -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var data = JSON.parse('{{ data_json|safe }}');
+            var reservasi_count = data.reservasi_count;
+            var service_count = data.service_count;
+            var jadwal_count = data.jadwal_count;
+
+            // Create and configure the Donut chart
+            var ctxPie = document.getElementById('myPieChart').getContext('2d');
+            var myPieChart = new Chart(ctxPie, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Reservasi', 'Service', 'Jadwal'],
+                    datasets: [{
+                        data: [reservasi_count, service_count, jadwal_count],
+                        backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc'],
+                        hoverBackgroundColor: ['#2e59d9', '#17a673', '#2c9faf'],
+                        hoverBorderColor: 'rgba(234, 236, 244, 1)',
+                    }],
+                },
+                options: {
+                    // Configure additional options for the chart
+                    // ...
+                },
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            var data = JSON.parse('{{ data_json|safe }}');
+            var produk_count = data.produk_count;
+            var penjualan_count = data.penjualan_count;
+            var pembelian_count = data.pembelian_count;
+            var transaksi_count = data.transaksi_count;
+
+            // Create and configure the Donut chart
+            var ctxPie = document.getElementById('myAreaChart').getContext('2d');
+            var myAreaChart = new Chart(ctxPie, {
+                type: 'pie',
+                data: {
+                    labels: ['Produk', 'Penjualan', 'Pembelian', 'Transaksi'],
+                    datasets: [{
+                        data: [produk_count, penjualan_count,pembelian_count, transaksi_count],
+                        backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc', '#36b9cc'],
+                        hoverBackgroundColor: ['#2e59d9', '#17a673', '#2c9faf', '#2c9faf'],
+                        hoverBorderColor: 'rgba(234, 236, 244, 1)',
+                    }],
+                },
+                options: {
+                    // Configure additional options for the chart
+                    // ...
+                },
+            });
+        });
+
+    </script>
+    <!-- ... -->
+
+</body>
+
+</html>
